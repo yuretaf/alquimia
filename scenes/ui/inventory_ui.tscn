@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cpqnlqxvkd1f2"]
+
+[ext_resource type="Script" uid="uid://dvlimr4a1dehd" path="res://scenes/ui/inventory_ui.gd" id="1_7nagc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kd6oq"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.09955944, 0.09955944, 0.09955944, 0.50980395)
+
+[node name="InventoryUI" type="Control" unique_id=1675676481]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7nagc")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=167332897]
+custom_minimum_size = Vector2(400, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kd6oq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=384493522]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1999352494]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=60443671]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer" unique_id=880672180]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=1179223219]
+layout_mode = 2
+columns = 5

@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dyd6bxjsbpbpi"]
+
+[ext_resource type="PackedScene" uid="uid://cpqnlqxvkd1f2" path="res://scenes/ui/inventory_ui.tscn" id="1_hyk8p"]
+[ext_resource type="Script" uid="uid://68b50ji15sxl" path="res://scenes/main/main.gd" id="1_iuonh"]
+
+[node name="Main" type="Node" unique_id=478979491]
+script = ExtResource("1_iuonh")
+
+[node name="World" type="Node2D" parent="." unique_id=1797063364]
+
+[node name="UI_Layer" type="CanvasLayer" parent="." unique_id=1586741995]
+
+[node name="HUD" type="Control" parent="UI_Layer" unique_id=346752757]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ToggleInventoryButton" type="Button" parent="UI_Layer/HUD" unique_id=1743155119]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_bottom = 100.0
+grow_horizontal = 0
+
+[node name="TestAddHerbButton" type="Button" parent="UI_Layer/HUD" unique_id=471386768]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InventoryUI" parent="UI_Layer" unique_id=1675676481 instance=ExtResource("1_hyk8p")]
+visible = false
