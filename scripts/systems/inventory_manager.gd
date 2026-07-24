@@ -1,62 +1,71 @@
 extends Node
+# Autoload: InventoryManager
+# Responsável por controlar adições, remoções e consultas de itens.
 
-# Emitido sempre que a quantidade de um item específico muda.
-# A UI (Camada de Apresentação) vai escutar esse sinal para atualizar os textos na tela.
-signal inventory_changed(item_id: String, new_quantity: int)
+# --- SINAIS ---
+# Emitido sempre que a quantidade de um item muda. A UI deve escutar este sinal.
+signal inventory_changed(item_id: String, new_quantity: int, difference: int)
+signal inventory_full() # Pode ser útil para feedback visual futuro
 
-# Referência em cache para o inventário salvo no GameState.
-var _inventory_state: Dictionary = {}
+# --- ESTADO ---
+# No futuro, este dicionário será referenciado/carregado do GameState pelo SaveManager[cite: 3].
+# Formato: { "item_id_string": quantidade_int }[cite: 3]
+var _items: Dictionary = {}
 
-func _ready() -> void:
-	# Aguardamos o GameManager avisar que o estado está pronto.
-	# Isso previne erros de inicialização onde o inventário tenta acessar um estado nulo.
-	GameManager.game_initialized.connect(_on_game_initialized)
+# Capacidade global temporária para o MVP (pode ser substituída por upgrades depois)[cite: 3]
+var global_capacity_limit: int = 9999 
 
-func _on_game_initialized() -> void:
-	# Pegamos a referência do dicionário de inventário que vive no GameState
-	_inventory_state = GameManager.get_state().inventory
-	print("InventoryManager: Conectado ao GameState com sucesso.")
+# --- MÉTODOS PÚBLICOS ---
 
-# Retorna a quantidade atual de um item.
-func get_quantity(item_id: String) -> int:
-	# Usamos o método get() do Dicionário, que retorna 0 se a chave não existir,
-	# evitando erros de "Key Not Found".
-	return _inventory_state.get(item_id, 0)
-
-# Verifica se o jogador possui pelo menos a quantidade solicitada.
-func has_item(item_id: String, amount: int) -> bool:
-	if amount <= 0:
-		return true # Sempre temos 0 ou menos de alguma coisa
-	return get_quantity(item_id) >= amount
-
-# Adiciona itens ao inventário.
-func add_item(item_id: String, amount: int) -> void:
-	if amount <= 0:
-		return
-		
-	var current_amount = get_quantity(item_id)
-	var new_amount = current_amount + amount
-	
-	# No futuro, aqui também poderemos adicionar a lógica de "Verificar Capacidade" 
-	# ligada aos Upgrades de Armazém Expandido[cite: 3].
-	
-	_inventory_state[item_id] = new_amount
-	
-	# Notificamos o resto do jogo (especialmente a UI) que este item mudou.
-	inventory_changed.emit(item_id, new_amount)
-
-# Remove itens do inventário.
-# Retorna um booleano indicando se a operação foi um sucesso.
-func remove_item(item_id: String, amount: int) -> bool:
-	if amount <= 0:
-		return true
-		
-	if not has_item(item_id, amount):
-		push_warning("InventoryManager: Tentativa de remover %d de '%s', mas há apenas %d." % [amount, item_id, get_quantity(item_id)])
+# Adiciona uma quantidade de um item pelo seu ID[cite: 3].
+func add_item(item_id: String, quantity: int) -> bool:
+	if quantity <= 0:
+		push_warning("Tentativa de adicionar quantidade nula ou negativa do item: ", item_id)
 		return false
 		
-	var new_amount = get_quantity(item_id) - amount
-	_inventory_state[item_id] = new_amount
+	var current_qty = get_quantity(item_id)
+	var new_qty = current_qty + quantity
 	
-	inventory_changed.emit(item_id, new_amount)
+	# Validação de Capacidade[cite: 3]
+	if new_qty > global_capacity_limit:
+		# Adiciona apenas até o limite
+		var allowed_to_add = global_capacity_limit - current_qty
+		if allowed_to_add > 0:
+			_items[item_id] = global_capacity_limit
+			inventory_changed.emit(item_id, global_capacity_limit, allowed_to_add)
+		inventory_full.emit()
+		return false # Não conseguiu adicionar tudo
+		
+	_items[item_id] = new_qty
+	inventory_changed.emit(item_id, new_qty, quantity)
 	return true
+
+# Remove uma quantidade de um item pelo seu ID[cite: 3].
+func remove_item(item_id: String, quantity: int) -> bool:
+	if quantity <= 0:
+		return false
+		
+	if not has_item(item_id, quantity):
+		push_warning("Tentativa de remover mais itens do que o disponível: ", item_id)
+		return false
+		
+	_items[item_id] -= quantity
+	inventory_changed.emit(item_id, _items[item_id], -quantity)
+	
+	# Limpeza de memória: remove a chave se a quantidade chegar a zero
+	if _items[item_id] == 0:
+		_items.erase(item_id)
+		
+	return true
+
+# Verifica se o jogador possui a quantidade necessária de um item[cite: 3].
+func has_item(item_id: String, quantity: int = 1) -> bool:
+	return get_quantity(item_id) >= quantity
+
+# Retorna a quantidade atual de um item[cite: 3].
+func get_quantity(item_id: String) -> int:
+	return _items.get(item_id, 0)
+	
+# Retorna o inventário inteiro (útil para o SaveManager no futuro)[cite: 3].
+func get_all_items() -> Dictionary:
+	return _items.duplicate()
