@@ -2,9 +2,9 @@ extends PanelContainer
 class_name InventorySlot
 # res://scripts/ui/inventory_slot.gd
 
-@onready var icon_rect: TextureRect = $MarginContainer/VBoxContainer/IconRect
-@onready var name_label: Label = $MarginContainer/VBoxContainer/NameLabel
-@onready var amount_label: Label = $MarginContainer/VBoxContainer/AmountLabel
+@onready var icon_rect: TextureRect = $VBoxContainer/IconRect
+@onready var name_label: Label = $VBoxContainer/NameLabel
+@onready var amount_label: Label = $VBoxContainer/AmountLabel
 
 # Função chamada pelo painel principal para atualizar os dados visuais
 func update_slot(item_id: String, amount: int) -> void:

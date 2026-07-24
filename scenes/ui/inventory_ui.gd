@@ -5,7 +5,7 @@ extends Control
 @export var slot_scene: PackedScene
 
 # Caminho para o Grid onde os itens aparecerão
-@onready var grid_container: GridContainer = $PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/GridContainer
+@onready var grid_container: GridContainer = %GridContainer
 
 # Dicionário interno para rastrear rapidamente qual slot na tela representa qual item
 var _slots: Dictionary = {} 

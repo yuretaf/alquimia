@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cpqnlqxvkd1f2"]
 
 [ext_resource type="Script" uid="uid://dvlimr4a1dehd" path="res://scenes/ui/inventory_ui.gd" id="1_7nagc"]
+[ext_resource type="PackedScene" uid="uid://cij1uojjc76tn" path="res://scenes/ui/inventory_slot.tscn" id="2_4ycse"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kd6oq"]
 content_margin_left = 20.0
@@ -16,7 +17,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_7nagc")
+slot_scene = ExtResource("2_4ycse")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=167332897]
 custom_minimum_size = Vector2(400, 500)
@@ -49,5 +52,6 @@ size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
 [node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=1179223219]
+unique_name_in_owner = true
 layout_mode = 2
 columns = 5
