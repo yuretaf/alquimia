@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bfw0jiot8qbhw"]
+
+[ext_resource type="Script" uid="uid://sd5smtss5jhi" path="res://scenes/ui/debug_console.gd" id="1_o0rh6"]
+
+[node name="DebugConsole" type="Node" unique_id=1447117487]
+script = ExtResource("1_o0rh6")
+
+[node name="ConsoleWindow" type="Window" parent="." unique_id=273637483]
+oversampling_override = 1.0
+title = "Console"
+position = Vector2i(50, 100)
+size = Vector2i(600, 400)
+transient = true
+
+[node name="MarginContainer" type="MarginContainer" parent="ConsoleWindow" unique_id=188922958]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConsoleWindow/MarginContainer" unique_id=1159280367]
+layout_mode = 2
+
+[node name="LogText" type="RichTextLabel" parent="ConsoleWindow/MarginContainer/VBoxContainer" unique_id=1082287597]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+scroll_following = true
+
+[node name="InputField" type="LineEdit" parent="ConsoleWindow/MarginContainer/VBoxContainer" unique_id=42572978]
+unique_name_in_owner = true
+layout_mode = 2

@@ -2,8 +2,8 @@ extends Node
 # res://scenes/main/main.gd
 # Atua como controlador da cena principal, gerenciando a abertura de painéis.
 
-@onready var inventory_ui: Control = $UI_Layer/InventoryUI
-@onready var toggle_inventory_button: Button = $UI_Layer/HUD/ToggleInventoryButton
+@onready var inventory_ui: Control = $UI_Layer/HBoxContainer/RightPanel/InventoryUI
+@onready var toggle_inventory_button: Button = $UI_Layer/HBoxContainer/RightPanel/ToggleInventoryButton
 @onready var test_add_herb_button: Button = $UI_Layer/HUD/TestAddHerbButton
 
 
@@ -13,11 +13,17 @@ func _ready() -> void:
 	# 1. Configuração inicial da UI
 	inventory_ui.hide() # Garante que o inventário comece fechado
 	toggle_inventory_button.text = "Abrir Inventário"
-	test_add_herb_button.text = "Coletar Erva Lunar"
+	#test_add_herb_button.text = "Coletar Erva Lunar"
 	
 	# 2. Conectando os sinais dos botões usando o padrão Observer
 	toggle_inventory_button.pressed.connect(_on_toggle_inventory_pressed)
-	test_add_herb_button.pressed.connect(_on_test_add_herb_pressed)
+	#test_add_herb_button.pressed.connect(_on_test_add_herb_pressed)
+	$UI_Layer/HBoxContainer/LeftPanel/GatherButtons/BtnHerb.pressed.connect(
+		func(): InventoryManager.add_item("ingredient_moon_herb", 1)
+	)
+	$UI_Layer/HBoxContainer/LeftPanel/GatherButtons/BtnWater.pressed.connect(
+		func(): InventoryManager.add_item("ingredient_crystal_water", 1)
+	)
 
 # --- CALLBACKS DOS BOTÕES ---
 

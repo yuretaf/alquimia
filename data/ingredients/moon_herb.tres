@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="IngredientData" format=3 uid="uid://beqgmhbyftet1"]
+
+[ext_resource type="Script" uid="uid://22urpxkth2hk" path="res://scripts/models/ingredient_data.gd" id="1_ry7sc"]
+
+[resource]
+script = ExtResource("1_ry7sc")
+id = "ingredient_moon_herb"
+display_name = "Erva Lunar"
+properties = {
+"property_vitality": 80
+}
+metadata/_custom_type_script = "uid://22urpxkth2hk"

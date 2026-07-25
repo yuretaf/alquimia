@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="RecipeData" format=3 uid="uid://i85kkpf65v7h"]
+
+[ext_resource type="Script" uid="uid://dsa087o1wk7t6" path="res://scripts/models/RecipeData.gd" id="1_xi0s0"]
+
+[resource]
+script = ExtResource("1_xi0s0")
+id = "recipe_health_potion"
+display_name = "Poção de Cura"
+ingredients = {
+"ingredient_crystal_water": 1,
+"ingredient_moon_herb": 2
+}
+production_time = 5.0
+base_stability = 80
+base_purity = 60
+output_product_id = "product_health_potion"
+metadata/_custom_type_script = "uid://22urpxkth2hk"

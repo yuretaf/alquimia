@@ -64,12 +64,15 @@ func _calculate_compatibility(ingredients_provided: Dictionary) -> int:
 	
 	# Passo A: Extrai todas as propriedades únicas da mistura
 	for item_id in ingredients_provided.keys():
-		# Quando tiver um DatabaseManager, buscará o Resource real aqui.
-		# Ex: var data = DatabaseManager.get_ingredient(item_id)
-		var ingredient_properties = _mock_get_ingredient_properties(item_id) 
-		for prop_id in ingredient_properties:
-			if not present_properties.has(prop_id):
-				present_properties.append(prop_id)
+		var ingredient_data = DatabaseManager.get_ingredient(item_id)
+		
+		if ingredient_data:
+			# Pega as chaves do dicionário de propriedades do Resource
+			for prop_id in ingredient_data.properties.keys():
+				if not present_properties.has(prop_id):
+					present_properties.append(prop_id)
+		else:
+			push_warning("AlchemyManager: Ingrediente não encontrado no banco - ", item_id)
 	
 	# Passo B: Analisa todos os pares únicos possíveis na mistura
 	var num_props = present_properties.size()
@@ -93,13 +96,6 @@ func _get_pair_compatibility(prop_a: String, prop_b: String) -> int:
 	# Se não existe na matriz, o estado é Neutro
 	return 0
 
-# Função temporária para mockar dados até integrar o carregamento de Resources `.tres`
-func _mock_get_ingredient_properties(item_id: String) -> Array[String]:
-	if item_id == "ingredient_moon_herb":
-		return ["property_vitality", "property_purity"]
-	elif item_id == "ingredient_shadow_mushroom":
-		return ["property_shadow"]
-	return []
 
 # Calcula o valor numérico da Qualidade
 func _calculate_quality_score(purity: int, stability: int, efficiency: float, compatibility: int) -> int:

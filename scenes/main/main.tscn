@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cpqnlqxvkd1f2" path="res://scenes/ui/inventory_ui.tscn" id="1_hyk8p"]
 [ext_resource type="Script" uid="uid://68b50ji15sxl" path="res://scenes/main/main.gd" id="1_iuonh"]
+[ext_resource type="PackedScene" uid="uid://d2ppatodgdojh" path="res://scenes/ui/station_ui.tscn" id="2_k2fmo"]
 
 [node name="Main" type="Node" unique_id=478979491]
 script = ExtResource("1_iuonh")
@@ -11,21 +12,13 @@ script = ExtResource("1_iuonh")
 [node name="UI_Layer" type="CanvasLayer" parent="." unique_id=1586741995]
 
 [node name="HUD" type="Control" parent="UI_Layer" unique_id=346752757]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="ToggleInventoryButton" type="Button" parent="UI_Layer/HUD" unique_id=1743155119]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -100.0
-offset_bottom = 100.0
-grow_horizontal = 0
 
 [node name="TestAddHerbButton" type="Button" parent="UI_Layer/HUD" unique_id=471386768]
 layout_mode = 1
@@ -41,5 +34,67 @@ offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InventoryUI" parent="UI_Layer" unique_id=1675676481 instance=ExtResource("1_hyk8p")]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI_Layer" unique_id=695812596]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftPanel" type="VBoxContainer" parent="UI_Layer/HBoxContainer" unique_id=522789470]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="HeaderLabel" type="Label" parent="UI_Layer/HBoxContainer/LeftPanel" unique_id=300948191]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Laboratório"
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI_Layer/HBoxContainer/LeftPanel" unique_id=236793656]
+layout_mode = 2
+
+[node name="GatherButtons" type="HBoxContainer" parent="UI_Layer/HBoxContainer/LeftPanel" unique_id=1370162606]
+layout_mode = 2
+
+[node name="BtnHerb" type="Button" parent="UI_Layer/HBoxContainer/LeftPanel/GatherButtons" unique_id=368000297]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Add Herb"
+
+[node name="BtnWater" type="Button" parent="UI_Layer/HBoxContainer/LeftPanel/GatherButtons" unique_id=71912909]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Add Water"
+
+[node name="StationGrid" type="GridContainer" parent="UI_Layer/HBoxContainer/LeftPanel" unique_id=46678766]
+layout_mode = 2
+
+[node name="StationUI" parent="UI_Layer/HBoxContainer/LeftPanel/StationGrid" unique_id=1546928542 instance=ExtResource("2_k2fmo")]
+layout_mode = 2
+
+[node name="RightPanel" type="VBoxContainer" parent="UI_Layer/HBoxContainer" unique_id=1999145817]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="HeaderLabel" type="Label" parent="UI_Layer/HBoxContainer/RightPanel" unique_id=554305815]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Inventário"
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI_Layer/HBoxContainer/RightPanel" unique_id=294982470]
+layout_mode = 2
+
+[node name="ToggleInventoryButton" type="Button" parent="UI_Layer/HBoxContainer/RightPanel" unique_id=1743155119]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="InventoryUI" parent="UI_Layer/HBoxContainer/RightPanel" unique_id=1675676481 instance=ExtResource("1_hyk8p")]
 visible = false
+layout_mode = 2
+size_flags_vertical = 3
