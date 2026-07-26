@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="IngredientData" format=3 uid="uid://bekv7qov1r8rx"]
+
+[ext_resource type="Script" uid="uid://22urpxkth2hk" path="res://scripts/models/item_data.gd" id="1_c68gb"]
+
+[resource]
+script = ExtResource("1_c68gb")
+id = "currency_gold"
+display_name = "Ouro"
+description = "Moeda padrão do reino comercial"
+base_value = 1
+metadata/_custom_type_script = "uid://22urpxkth2hk"

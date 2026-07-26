@@ -3,11 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://cpqnlqxvkd1f2" path="res://scenes/ui/inventory_ui.tscn" id="1_hyk8p"]
 [ext_resource type="Script" uid="uid://68b50ji15sxl" path="res://scenes/main/main.gd" id="1_iuonh"]
 [ext_resource type="PackedScene" uid="uid://d2ppatodgdojh" path="res://scenes/ui/station_ui.tscn" id="2_k2fmo"]
+[ext_resource type="PackedScene" uid="uid://ptse7boa4g1m" path="res://scenes/ui/market_ui.tscn" id="3_l3cfh"]
 
 [node name="Main" type="Node" unique_id=478979491]
 script = ExtResource("1_iuonh")
 
 [node name="World" type="Node2D" parent="." unique_id=1797063364]
+visible = false
 
 [node name="UI_Layer" type="CanvasLayer" parent="." unique_id=1586741995]
 
@@ -68,6 +70,11 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "Add Water"
 
+[node name="OpenMarketButton" type="Button" parent="UI_Layer/HBoxContainer/LeftPanel/GatherButtons" unique_id=745275550]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Mercado"
+
 [node name="StationGrid" type="GridContainer" parent="UI_Layer/HBoxContainer/LeftPanel" unique_id=46678766]
 layout_mode = 2
 
@@ -97,4 +104,8 @@ size_flags_vertical = 4
 [node name="InventoryUI" parent="UI_Layer/HBoxContainer/RightPanel" unique_id=1675676481 instance=ExtResource("1_hyk8p")]
 visible = false
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarketUI" parent="UI_Layer" unique_id=812977479 instance=ExtResource("3_l3cfh")]
+visible = false
 size_flags_vertical = 3

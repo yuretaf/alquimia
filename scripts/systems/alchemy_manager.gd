@@ -64,7 +64,7 @@ func _calculate_compatibility(ingredients_provided: Dictionary) -> int:
 	
 	# Passo A: Extrai todas as propriedades únicas da mistura
 	for item_id in ingredients_provided.keys():
-		var ingredient_data = DatabaseManager.get_ingredient(item_id)
+		var ingredient_data = DatabaseManager.get_item(item_id)
 		
 		if ingredient_data:
 			# Pega as chaves do dicionário de propriedades do Resource

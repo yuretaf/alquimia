@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MarketData" format=3 uid="uid://dm4u1ctomt0m8"]
+
+[ext_resource type="Script" uid="uid://cknt62b1w7x5v" path="res://scripts/models/market_data.gd" id="1_priop"]
+
+[resource]
+script = ExtResource("1_priop")
+id = "market_frontier"
+base_modifier = 1.1
+preferred_categories = Array[String](["potion"])
+metadata/_custom_type_script = "uid://cknt62b1w7x5v"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://ceo4v6c4pw25e"]
+
+[ext_resource type="Script" uid="uid://22urpxkth2hk" path="res://scripts/models/item_data.gd" id="1_8kas0"]
+
+[resource]
+script = ExtResource("1_8kas0")
+id = "product_health_potion"
+display_name = "Poção de Cura"
+category = "potion"
+base_value = 5
+metadata/_custom_type_script = "uid://b78nc111s82f7"

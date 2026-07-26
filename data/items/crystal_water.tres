@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="IngredientData" format=3 uid="uid://boi0s3uqdsqpe"]
 
-[ext_resource type="Script" uid="uid://22urpxkth2hk" path="res://scripts/models/ingredient_data.gd" id="1_ayq2k"]
+[ext_resource type="Script" uid="uid://22urpxkth2hk" path="res://scripts/models/item_data.gd" id="1_ayq2k"]
 
 [resource]
 script = ExtResource("1_ayq2k")
 id = "ingredient_crystal_water"
 display_name = "Água Cristalina"
+base_value = 1
 properties = {
 "property_purity": 40
 }

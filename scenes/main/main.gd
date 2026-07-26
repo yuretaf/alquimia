@@ -5,6 +5,8 @@ extends Node
 @onready var inventory_ui: Control = $UI_Layer/HBoxContainer/RightPanel/InventoryUI
 @onready var toggle_inventory_button: Button = $UI_Layer/HBoxContainer/RightPanel/ToggleInventoryButton
 @onready var test_add_herb_button: Button = $UI_Layer/HUD/TestAddHerbButton
+@onready var open_market_button: Button = $UI_Layer/HBoxContainer/LeftPanel/GatherButtons/OpenMarketButton
+@onready var market_ui: Control = $UI_Layer/MarketUI
 
 
 const TEST_ITEM_ID: String = "ingredient_moon_herb"
@@ -24,6 +26,7 @@ func _ready() -> void:
 	$UI_Layer/HBoxContainer/LeftPanel/GatherButtons/BtnWater.pressed.connect(
 		func(): InventoryManager.add_item("ingredient_crystal_water", 1)
 	)
+	open_market_button.pressed.connect(func(): market_ui.open_market("market_capital"))
 
 # --- CALLBACKS DOS BOTÕES ---
 

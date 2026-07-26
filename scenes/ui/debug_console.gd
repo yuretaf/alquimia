@@ -33,6 +33,8 @@ func _register_commands() -> void:
 	_commands["give"] = _cmd_give
 	_commands["time"] = _cmd_time
 	_commands["help"] = _cmd_help
+	_commands["save"] = _cmd_save
+	_commands["load"] = _cmd_load
 
 func _on_text_submitted(text: String) -> void:
 	input_field.clear()
@@ -74,7 +76,7 @@ func _cmd_give(args: Array) -> void:
 	# 2. Se existe, adiciona ao inventário
 	if InventoryManager.add_item(item_id, quantity):
 		# Pega o nome real do item para um print mais bonito
-		var item_data = DatabaseManager.get_ingredient(item_id)
+		var item_data = DatabaseManager.get_item(item_id)
 		var display_name = item_data.display_name if item_data else item_id
 		
 		_print_to_log("Adicionado %d de %s." % [quantity, display_name], Color.GREEN)
@@ -93,3 +95,13 @@ func _cmd_time(args: Array) -> void:
 
 func _cmd_help(_args: Array) -> void:
 	_print_to_log("Comandos disponíveis: give, time, help", Color.LIGHT_BLUE)
+
+func _cmd_save(_args: Array) -> void:
+	SaveManager.save_game("world_01", "Meu Laboratório")
+	_print_to_log("Jogo salvo com sucesso em world_01!", Color.GREEN)
+
+func _cmd_load(_args: Array) -> void:
+	if SaveManager.load_game("world_01"):
+		_print_to_log("Jogo carregado com sucesso!", Color.GREEN)
+	else:
+		_print_to_log("Falha ao carregar o save.", Color.RED)

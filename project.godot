@@ -24,6 +24,9 @@ AlchemyManager="*uid://cnrxooeqbg341"
 ProductionManager="*uid://3fsxey0vvsxo"
 DebugConsole="*uid://bfw0jiot8qbhw"
 DatabaseManager="*uid://0pgd54fdngr5"
+EconomyManager="*uid://b81lf80je0nsp"
+MarketManager="*uid://dqvgp01ot6dm4"
+SaveManager="*uid://dph3vu8w837s"
 
 [display]
 
